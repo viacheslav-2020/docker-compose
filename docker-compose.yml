@@ -1,0 +1,16 @@
+version: '2'
+services:
+  sborka:
+    build: sborka_dc
+    volumes:
+      - data_volume:/app
+  prod:
+    build: prod_dc
+    links:
+      - sborka
+    ports:
+      - "80:8080"
+    volumes:
+      - data_volume:/usr/local/tomcat/webapps
+volumes:
+  data_volume:
